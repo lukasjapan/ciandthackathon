@@ -10,11 +10,11 @@ class ImageUrlRetrieverService {
     public function __construct() {
         $this->client = new \Google_Client();
         $this->client->setApplicationName("cithackathonstarwars");
-        $this->client->setDeveloperKey("");
+        $this->client->setDeveloperKey('');
     }
 
     public function getImage($name) {
-        return "https://lumiere-a.akamaihd.net/v1/images/luke-skywalker-main_5a38c454_461eebf5.jpeg?region=0%2C0%2C1536%2C864&width=768";
+        // return "https://lumiere-a.akamaihd.net/v1/images/luke-skywalker-main_5a38c454_461eebf5.jpeg?region=0%2C0%2C1536%2C864&width=768";
 
         
         // should cache with laraval but dont know how...

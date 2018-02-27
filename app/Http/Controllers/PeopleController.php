@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Helper\BMI;
 use App\Http\Controllers\Helper\People;
 use App\Service\ImageUrlRetrieverService;
+use App\Service\BMIListService;
 use Illuminate\Support\Facades\Cache;
 
 class PeopleController extends Controller
@@ -20,7 +21,9 @@ class PeopleController extends Controller
         // request
         $url = 'https://swapi.co/api/people/' . $request->id;
 
-        $bmiPeople = $request->session()->get('bmiList');
+        //$bmiPeople = $request->session()->get('bmiList');
+        $bmiPeople = BMIListService::makeBMIList();
+
         $result = $this->searchBMIById($request->id, $bmiPeople);
         if ($result == null) {
             return;
@@ -79,12 +82,12 @@ class PeopleController extends Controller
         // TODO: should preprocess the whole data and store somewhere
         // right now only first result set is taken into account
         // and is saved into session which is not optimal
-        $bmiHelper = new BMI();
-        $bmiPeople = $bmiHelper->makeBMIList($response);
-        $peopleHelper = new People();
+        // $bmiHelper = new BMI();
+        // $bmiPeople = $bmiHelper->makeBMIList($response);
+        // $peopleHelper = new People();
 
-        $sortedPeople = $peopleHelper->sortByBMI($bmiPeople);
-        $request->session()->put('bmiList', $sortedPeople);
+        //$sortedPeople = $peopleHelper->sortByBMI($bmiPeople);
+        //$request->session()->put('bmiList', $sortedPeople);
 
         // get images
         $imageUrls = array_map(function ($people) use ($imageRetrieverService) {
