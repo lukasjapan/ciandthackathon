@@ -25,9 +25,9 @@ class PeopleController extends Controller
         $bmiPeople = BMIListService::makeBMIList();
 
         $result = $this->searchBMIById($request->id, $bmiPeople);
-        if ($result == null) {
-            return;
-        }
+        //if ($result == null) {
+        //    return;
+        //}
 
         $peopleHelper = new People();
         $friends = $peopleHelper->getMyFriends($bmiPeople, $result['index']); 
@@ -44,7 +44,7 @@ class PeopleController extends Controller
         return view('people', [
             "main" => array(
                 'person' => $response,
-                'bmi' => $result['bmi'],
+                'bmi' => $result['bmi'] ?: '???',
                 'imageUrl' => $imageUrl
             ),
             "left" => $friends[0],
